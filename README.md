@@ -3,4 +3,4 @@ An OpenAPI (2.0) specification of the <a href="https://tripleseat.zendesk.com/hc
 
 This document may be converted to OpenAPI 3.0, but you will lose the ability to integrate into more restrictive platforms that do not yet support this version of the OpenAPI initiative.
 
-## You may view the Swagger documentation at: <a href="https://app.swaggerhub.com/apis/Nick.Brown/TripleseatAPI/1.0.0">SwaggerHub</a>
+## You may view the Swagger documentation at: <a href="https://app.swaggerhub.com/apis/Nick.Brown/Tripleseat/1.0.0">SwaggerHub</a>
