@@ -1,0 +1,2482 @@
+swagger: '2.0'
+info:
+  description: Tripleseat API
+  version: 1.0.0
+  title: Tripleseat API
+  contact:
+    email: overflow2341313@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: api.tripleseat.com
+basePath: /v1
+tags:
+  - name: 'Accounts'
+  - name: 'Bookings'
+  - name: 'Contacts'
+  - name: 'Events'
+  - name: 'Leads'
+  - name: 'Locations'
+  - name: 'Sites'
+  - name: 'Users'
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /accounts.json:
+    get:
+      tags:
+        - Accounts
+      operationId: getAccounts
+      summary: "Retrieves a paginated list of accounts (50 per page, use page parameter listed below to iterate over pages)."
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Accounts"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+      security:
+        - public_key: []
+    post:
+      tags:
+        - Accounts
+      operationId: createAccount
+      summary: "Create an account"
+      parameters:
+        - name: account
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Account"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /accounts/{id}.json:
+    get:
+      operationId: getAccountById
+      tags:
+        - Accounts
+      summary: "Retrieves an account by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    put:
+      tags:
+        - Accounts
+      operationId: updateAccountByID
+      summary: "Updates an account by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+        - name: account
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Account"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    delete:
+      operationId: deleteAccountByID
+      tags:
+        - Accounts
+      summary: "Deletes the account for the given ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Account"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /accounts/search.json:
+    get:
+      tags:
+        - Accounts
+      operationId: searchForAccounts
+      summary: "Search for accounts using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, email, phone"
+        - name: order
+          type: string
+          in: query
+          enum:
+            - "created_at"
+            - "updated_at"
+            - "name"
+        - name: sort_direction
+          in: query
+          type: string
+          enum:
+            - "desc"
+            - "asc"
+        - name: account_created_start_date
+          in: query
+          type: string
+          format: date
+          description: "Also requires end date"
+        - name: account_created_end_date
+          in: query
+          type: string
+          format: date
+          description: "Also requires start date"
+        - name: account_updated_start_date
+          in: query
+          type: string
+          format: date
+          description: "Also requires end date"
+        - name: account_updated_end_date
+          in: query
+          type: string
+          format: date
+          description: "Also requires start date"
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Accounts"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /bookings.json:
+    get:
+      tags:
+        - Bookings
+      operationId: getBookings
+      summary: "Retrieves a paginated list of bookings (50 per page, use page parameter listed below to iterate over pages)."
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Bookings"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    post:
+      tags:
+        - Bookings
+      operationId: createBooking
+      summary: "Create a booking"
+      parameters:
+        - name: booking
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Booking"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Booking"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /bookings/{id}.json:
+    get:
+      operationId: getBookingByID
+      tags:
+        - Bookings
+      summary: "Retrieves a booking by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Booking"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    put:
+      tags:
+        - Bookings
+      operationId: updateBookingByID
+      summary: "Updates a booking by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+        - name: booking
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Booking"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Booking"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    delete:
+      operationId: deleteBookingByID
+      tags:
+        - Bookings
+      summary: "Deletes the booking for the given ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Booking"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /bookings/search.json:
+    get:
+      tags:
+        - Bookings
+      operationId: searchForBookings
+      summary: "Search for bookings using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, event names"
+        - name: order
+          in: query
+          type: string
+          enum:
+            - "name"
+            - "created_at"
+            - "updated_at"
+          description: "The order search results are returned in"
+        - name: sort_direction
+          in: query
+          type: string
+          enum:
+            - "desc"
+            - "asc"
+          description: "The sort direction for the order of search results."
+        - name: location_ids
+          type: string
+          description: "Comma separated list of Location ID's"
+          in: query
+        - name: booking_start_date
+          in: query
+          type: string
+          format: date
+        - name: booking_end_date
+          in: query
+          type: string
+          format: date
+        - name: booking_created_start_date
+          in: query
+          type: string
+          format: date
+        - name: booking_created_end_date
+          in: query
+          type: string
+          format: date
+        - name: booking_updated_start_date
+          in: query
+          type: string
+          format: date
+        - name: booking_updated_end_date
+          in: query
+          type: string
+          format: date
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Bookings"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /contacts.json:
+    post:
+      tags:
+        - Contacts
+      operationId: createContact
+      summary: "Create a contact"
+      parameters:
+        - name: contact
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Contact"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Contact"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /contacts/{id}.json:
+    get:
+      operationId: getContactById
+      tags:
+        - Contacts
+      summary: "Retrieves a contact by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Contact"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    put:
+      tags:
+        - Contacts
+      operationId: updateContactByID
+      summary: "Updates a contact by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+        - name: contact
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Contact"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Contact"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    delete:
+      operationId: deleteContactByID
+      tags:
+        - Contacts
+      summary: "Deletes the Contact for the given ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Contact"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /contacts/search.json:
+    get:
+      tags:
+        - Contacts
+      operationId: searchForContacts
+      summary: "Search for contcts using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, account, email, phone"
+        - name: order
+          in: query
+          type: string
+          enum:
+            - "created_at"
+            - "updated_at"
+            - "name"
+          description: "The order search results are returned in"
+        - name: sort_direction
+          in: query
+          type: string
+          enum:
+            - "desc"
+            - "asc"
+          description: "The sort direction for the order of search results."
+        - name: contact_created_start_date
+          type: string
+          format: date
+          in: query
+          description: "mm/dd/yyyy (also requires end date)"
+        - name: contact_created_end_date
+          type: string
+          format: date
+          in: query
+          description: "mm/dd/yyyy (also requires start date)"
+        - name: contact_updated_start_date
+          type: string
+          format: date
+          in: query
+          description: "mm/dd/yyyy (also requires end date)"
+        - name: contact_updated_end_date
+          type: string
+          format: date
+          in: query
+          description: "mm/dd/yyyy (also requires start date)"
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Contacts"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /events.json:
+    get:
+      tags:
+        - Events
+      operationId: getEvents
+      summary: "Retrieves a paginated list of events (50 per page, use page parameter listed below to iterate over pages)."
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Events"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    post:
+      tags:
+        - Events
+      operationId: createEvent
+      summary: "Create an event"
+      parameters:
+        - name: event
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /events/{id}.json:
+    get:
+      operationId: getEventById
+      tags:
+        - Events
+      summary: "Retrieves an event by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    put:
+      tags:
+        - Events
+      operationId: updateEventByID
+      summary: "Updates an event by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+        - name: event
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    delete:
+      operationId: deleteEventByID
+      tags:
+        - Events
+      summary: "Deletes the event for the given ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /events/search.json:
+    get:
+      tags:
+        - Events
+      operationId: searchForEvents
+      summary: "Search for events using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, email, phone"
+        - name: order
+          in: query
+          type: string
+          enum:
+            - "first_name"
+            - "last_name"
+            - "company"
+            - "created_at"
+            - "updated_at"
+          description: "The order search results are returned in"
+        - name: sort_direction
+          in: query
+          type: string
+          enum:
+            - "desc"
+            - "asc"
+          description: "The sort direction for the order of search results."
+        - name: email_opt_in
+          type: boolean
+          in: query
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+        - name: lead_status
+          type: string
+          in: query
+          enum:
+            - "all"
+            - "not_converted"
+            - "turned_down"
+            - "deleted"
+            - "converted_to_account"
+            - "converted_to_booking"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Events"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /leads.json:
+    get:
+      tags:
+        - Leads
+      operationId: getLeads
+      summary: "Retrieves a paginated list of leads (50 per page, use page parameter listed below to iterate over pages)."
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Leads"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    post:
+      tags:
+        - Leads
+      operationId: createLead
+      summary: "Create a lead"
+      parameters:
+        - name: lead
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Lead"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Lead"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /leads/{id}.json:
+    get:
+      operationId: getLeadById
+      tags:
+        - Leads
+      summary: "Retrieves a lead by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Lead"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    put:
+      tags:
+        - Leads
+      operationId: updateLeadByID
+      summary: "Updates a lead by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+        - name: lead
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Lead"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Lead"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+    delete:
+      operationId: deleteLeadByID
+      tags:
+        - Leads
+      summary: "Deletes the lead for the given ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Lead"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /leads/search.json:
+    get:
+      tags:
+        - Leads
+      operationId: searchForLeads
+      summary: "Search for leads using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, email, phone"
+        - name: order
+          in: query
+          type: string
+          enum:
+            - "first_name"
+            - "last_name"
+            - "company"
+            - "created_at"
+            - "updated_at"
+          description: "The order search results are returned in"
+        - name: sort_direction
+          in: query
+          type: string
+          enum:
+            - "desc"
+            - "asc"
+          description: "The sort direction for the order of search results."
+        - name: email_opt_in
+          type: boolean
+          in: query
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+        - name: lead_status
+          type: string
+          in: query
+          enum:
+            - "all"
+            - "not_converted"
+            - "turned_down"
+            - "deleted"
+            - "converted_to_account"
+            - "converted_to_booking"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Leads"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /locations.json:
+    get:
+      tags:
+        - Locations
+      operationId: getLocations
+      summary: "Retrieves the full list of locations for your installation."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Locations"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /sites.json:
+    get:
+      tags:
+        - Sites
+      operationId: getSites
+      summary: "Retrieves the full list of sites for your installation."
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Sites"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /users.json:
+    get:
+      tags:
+        - Users
+      operationId: getUsers
+      summary: "Retrieves a paginated list of users (50 per page, use page parameter listed below to iterate over pages)."
+      parameters:
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Users"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /users/{id}.json:
+    get:
+      operationId: getUserById
+      tags:
+        - Users
+      summary: "Retrieves a user by its ID."
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int64
+          minimum: 0    
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+  /users/search.json:
+    get:
+      tags:
+        - Users
+      operationId: searchForUsers
+      summary: "Search for users using filtering parameters"
+      parameters:
+        - name: query
+          in: query
+          type: string
+          description: "Searches by name, email, phone"
+        - name: page
+          in: query
+          type: integer
+          format: int64
+          minimum: 1
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Users"
+        400:
+          description: "Invalid Database Id"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        401:
+          description: "Invalid Username or Password"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        403:
+          description: "Forbidden request."
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        404:
+          description: "Endpoint not found"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        405:
+          description: "Access token must be retrieved over SSL"  
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        500:
+          description: "Session Expired"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        503:
+          description: "Service is unavailable"
+          schema:
+            $ref: "#/definitions/NotOkayResponse"
+        default:
+          description: "Unexpected response"
+definitions:
+  ##########################
+  #                        #
+  #  RESPONSE DEFINITIONS  #
+  #                        #
+  ##########################
+  NotOkayResponse:
+    type: object
+    properties:
+      errors:
+        type: array
+        items:
+          type: string
+  ##########################
+  #                        #
+  #   OBJECT DEFINITIONS   #
+  #                        #
+  ##########################
+  Accounts:
+    type: array
+    items:
+      $ref: "#/definitions/Account"
+  Account:
+    properties:
+      name:
+        type: string
+        description: "The name of this account"
+      description:
+        type: string
+      owned_by:
+        type: integer
+        format: int64
+        description: "The ID of the Tripleseat user who owns this account"
+      primary_contact_id:
+        type: integer
+        format: int64
+        description: "Contact ID of the primary contact for this account"
+      phone_numbers:
+        $ref: "#/definitions/PhoneNumbers"
+      websites:
+        $ref: "#/definitions/Websites"
+      addresses:
+        $ref: "#/definitions/Addresses"
+      custom_fields:
+        $ref: "#/definitions/CustomFields"
+    required:
+      - name
+    type: object
+  Bookings:
+    type: array
+    items:
+      $ref: "#/definitions/Booking"
+  Booking:
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      location_id:
+        type: integer
+        format: int64
+        description: "Location ID for this booking"
+      account_id:
+        type: integer
+        format: int64
+      contact_id:
+        type: integer
+        format: int64
+    required:
+      - name
+    type: object
+  Contacts:
+    type: array
+    items:
+      $ref: "#/definitions/Contact"
+  Contact:
+    description: "A contact represents an individual. Contacts always belong to an Account."
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      title:
+        type: string
+        description: "VP, President, Manager, etc"
+      description:
+        type: string
+        description: "Additional information"
+      owned_by:
+        type: integer
+        format: int64
+        minimum: 0
+        description: "The ID of the Tripleset user who owns this contact (see Users API)"
+      account_id:
+        type: integer
+        format: int64
+        minimum: 0
+        description: "Account ID for this contact"
+      email_opt_in:
+        type: boolean
+        description: "Opt in for mareting or newsletter emails from you"
+      contact_type:
+        type: string
+        description: "The name of the contact type see the Sites API for more details."
+      phone_numbers:
+        $ref: "#/definitions/PhoneNumbers"
+      email_addresses:
+        $ref: "#/definitions/EmailAddresses"
+      addresses:
+        $ref: "#/definitions/Addresses"
+      custom_fields:
+        $ref: "#/definitions/CustomFields"
+    required:
+      - first_name
+      - last_name
+    type: object
+  Websites:
+    type: array
+    items:
+      $ref: "#/definitions/Website"
+  Website:
+    properties:
+      id:
+        type: integer
+        format: int64
+      url:
+        type: string
+    type: object
+  PhoneNumbers:
+    type: array
+    items:
+      $ref: "#/definitions/PhoneNumber"
+  PhoneNumber:
+    properties:
+      number:
+        type: string
+      id:
+        type: integer
+        format: int64
+    type: object
+  EmailAddresses:
+    type: array
+    items:
+      $ref: "#/definitions/EmailAddress"
+  EmailAddress:
+    properties:
+      id:
+        type: integer
+        format: int64
+      address:
+        type: string
+    type: object
+  Addresses:
+    type: array
+    items:
+      $ref: "#/definitions/Address"
+  Address:
+    properties:
+      id:
+        type: integer
+        format: int64
+      address1:
+        type: string
+      address2:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      country:
+        type: string
+      zip_code:
+        type: string
+      address_type:
+        type: string
+    type: object
+  ContactTypes:
+    type: array
+    items:
+      $ref: "#/definitions/ContactType"
+  ContactType:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        minimum: 0
+      name:
+        type: string
+        description: "The name of the contact type"
+  Leads:
+    type: array
+    items:
+      $ref: "#/definitions/Lead"
+  Lead:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      company:
+        type: string
+        description: "Business or organization"
+      location_id:
+        type: integer
+        format: int64
+        minimum: 0
+        description: "Location ID"
+      start_time:
+        type: string
+        description: "e.g., 5:30pm (HH:MM AM|PM)"
+      end_time:
+        type: string
+        description: "e.g., 7:00pm (HH:MM AM|PM)"
+      event_date:
+        type: string
+        format: date
+        description: "Date of event (MM/DD/YYYY)"
+      event_description:
+        type: string
+        description: "Nature of event (party, graduation, etc.)"
+      guest_count:
+        type: integer
+        format: int64
+        minimum: 0
+      phone_number:
+        type: string
+      email_address:
+        type: string
+      phone_number_extension:
+        type: string
+      turned_down_at:
+        type: string
+        format: date
+        description: "date turned down (MM/DD/YYYY HH:MM AM|PM)"
+      turned_down_reason:
+        type: string
+      contact_preference:
+        type: string
+        enum:
+          - "Phone"
+          - "Email"
+        description: "Phone or Email"
+      lead_source_id:
+        type: integer
+        format: integer64
+        description: "Lead Source ID (see sites API)"
+      email_opt_in:
+        type: boolean
+        description: "Opt in for marketing or newsletter emails from you"
+      additional_information:
+        type: string
+        description: "Additional notes"
+    type: object
+  Events:
+    type: array
+    items:
+      $ref: "#/definitions/Event"
+  Event:
+    properties:
+      name:
+        type: string
+      event_start:
+        type: string
+        format: datetime
+        description: "Start date time"
+      event_end:
+        type: string
+        format: datetime
+        description: "End date time"
+      start_time:
+        type: string
+        format: datetime
+        description: "(Deprecated) Start date time"
+      end_time:
+        type: string
+        format: datetime
+        description: "(Deprecated) End date time"
+      event_start_utc:
+        type: string
+        format: datetime
+      event_end_utc:
+        type: string
+        format: datetime
+      setup_time:
+        type: integer
+        format: int64
+        description: "Time (in minutes) for setup"
+      teardown_time:
+        type: integer
+        format: int64
+        description: "Time (in minutes) for teardown"
+      event_start_time_with_setup_time:
+        type: string
+      event_end_time_with_teardown_time:
+        type: string
+      account_id:
+        type: integer
+        format: int64
+      contact_id:
+        type: integer
+        format: int64
+      owned_by:
+        type: integer
+        format: int64
+        description: "The ID of the Tripleseat user who owns this event (see Users API)"
+      guranteed_guest_count:
+        type: integer
+      guest_count:
+        type: integer
+      food_and_beverage_min:
+        type: string
+      rental_fee:
+        type: string
+      price_per_person:
+        type: string
+      deposit_amount:
+        type: string
+      actual_amount:
+        type: string
+      grand_total:
+        type: string
+      amount_due:
+        type: string
+      event_type_id:
+        type: integer
+        format: int64
+        description: "ID of Event Type (See Sites API for values)"
+      lead_source_id:
+        type: integer
+        format: int64
+        description: "ID of Lead Source (See Sites API for values)"
+      lost_reason:
+        type: string
+      lost_reason_details:
+        type: string
+      status:
+        type: string
+        enum:
+          - "DEFINITE"
+          - "PROSPECT"
+          - "TENTATIVE"
+          - "CLOSED"
+          - "LOST"
+      location_id:
+        type: integer
+        format: int64
+        description: "The location ID for this event (See Locations API)"
+      location:
+        $ref: "#/definitions/EventLocation"
+      room_ids:
+        $ref: "#/definitions/IntegerArray"
+      rooms:
+        $ref: '#/definitions/Rooms'
+      booking_id:
+        type: integer
+        format: int64
+        description: "Object containing information about the booking for this event."
+      description:
+        type: string
+      managing_user_ids:
+        $ref: "#/definitions/IntegerArray"
+      custom_fields:
+        $ref: "#/definitions/CustomFields"
+      billing_totals:
+        $ref: "#/definitions/BillingTotals"
+      category_totals:
+        $ref: "#/definitions/CategoryTotals"
+      documents:
+        $ref: "#/definitions/Documents"
+      document_ids:
+        $ref: "#/definitions/IntegerArray"
+    required:
+      - name
+      - event_start
+      - event_end
+      - account_id
+      - contact_id
+      - status
+      - location_id
+      - room_ids
+      - booking_id
+    type: object
+  Users:
+    type: array
+    items:
+      $ref: "#/definitions/User"
+  User:
+    properties:
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      login_count:
+        type: integer
+        format: int64
+      login_at:
+        type: string
+      title:
+        type: string
+      phone_numbers:
+        $ref: "#/definitions/PhoneNumbers"
+    type: object
+  Documents:
+    properties:
+      line_items:
+        $ref: "#/definitions/LineItems"
+      billing_totals:
+        $ref: "#/definitions/BillingTotals"
+      category_totals:
+        $ref: "#/definitions/CategoryTotals"
+      payment_set:
+        $ref: "#/definitions/PaymentSet"
+    type: object
+  LineItems:
+    type: array
+    items:
+      $ref: "#/definitions/LineItem"
+  LineItem:
+    properties:
+      id:
+        type: integer
+        format: int64
+      description:
+        type: string
+      value:
+        type: string
+      total_price:
+        type: string
+  PaymentSet:
+    properties:
+      amount_due:
+        type: string
+      running_balance:
+        type: string
+      remaining_payment_amount:
+        type: string
+      document_name:
+        type: string
+        description: "Name of associated Document (if applicable)"
+      amount:
+        type: string
+      state:
+        type: string
+      billing_kind:
+        type: string
+        description: "Type of payment (deposit, amount_due, etc.)"
+      custom_title:
+        type: string
+    type: object
+  EventLocations:
+    type: array
+    items:
+      $ref: "#/definitions/EventLocation"
+  EventLocation:
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    type: object
+  Locations:
+    type: array
+    items:
+      $ref: "#/definitions/Location"
+  Location:
+    properties:
+      name:
+        type: string
+      site_name:
+        type: string
+        description: "The group or site this location belongs to"
+      room_ids:
+        $ref: "#/definitions/IntegerArray"
+      rooms:
+        $ref: "#/definitions/Rooms"
+      custom_fields:
+        $ref: "#/definitions/CustomFields"
+    required:
+      - name
+    type: object
+  Sites:
+    type: array
+    items:
+      $ref: "#/definitions/Site"
+  Site:
+    properties:
+      name:
+        type: string
+      subdomain:
+        type: string
+        description: "The URL subdomain to log into this site."
+      timezone:
+        type: string
+        description: "The timezone for this site"
+      contact_types:
+        $ref: "#/definitions/ContactTypes"
+      event_types:
+        $ref: "#/definitions/EventTypes"
+      lead_sources:
+        $ref: "#/definitions/LeadSources"
+      task_types:
+        $ref: "#/definitions/TaskTypes"
+    required:
+      - name
+    type: object
+  Rooms:
+    type: array
+    items:
+      $ref: "#/definitions/Room"
+  Room:
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      capacity:
+        type: integer
+        format: int32
+        minimum: 0
+    type: object
+  BillingTotals:
+    type: array
+    items:
+      $ref: "#/definitions/BillingTotal"
+  BillingTotal:
+    properties:
+      description:
+        type: string
+      value:
+        type: string
+      total_price:
+        type: string
+    type: object
+  CategoryTotals:
+    type: array
+    items:
+      $ref: "#/definitions/CategoryTotal"
+  CategoryTotal:
+    type: object
+  LeadSources:
+    type: array
+    items:
+      $ref: "#/definitions/LeadSource"
+  LeadSource:
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    type: object
+  TaskTypes:
+    type: array
+    items:
+      $ref: "#/definitions/TaskType"
+  TaskType:
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    type: object
+  EventTypes:
+    type: array
+    items:
+      $ref: "#/definitions/EventType"
+  EventType:
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    type: object
+  SelectedLeadSources:
+    type: array
+    items:
+      $ref: "#/definitions/SelectedLeadSource"
+  SelectedLeadSource:
+    properties:
+      lead_source_id:
+        type: integer
+        format: int64
+      lead_source_other:
+        type: string
+      lead_source_name:
+        type: string
+    type: object
+  CustomFields:
+    type: array
+    items:
+      $ref: "#/definitions/CustomField"
+  CustomField:
+    properties:
+      id:
+        type: integer
+        format: int64
+      custom_field_name:
+        type: string
+      custom_field_id:
+        type: integer
+        format: int64
+      value:
+        type: string
+    type: object
+  StatusChanges:
+    type: array
+    items:
+      $ref: "#/definitions/StatusChange"
+  StatusChange:
+    properties:
+      status:
+        type: string
+        enum:
+          - "DEFINITE"
+          - "PROSPECT"
+          - "TENTATIVE"
+          - "CLOSED"
+          - "LOST"
+      previous_status:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: integer
+        format: int64
+        description: "The ID of the User that changed the status."
+    type: object
+  IntegerArray:
+    type: array
+    items:
+      type: integer
