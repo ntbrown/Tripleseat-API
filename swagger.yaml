@@ -73,8 +73,6 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-      security:
-        - public_key: []
     post:
       tags:
         - Accounts
