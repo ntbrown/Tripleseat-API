@@ -26,7 +26,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /accounts:
+  /accounts.json:
     get:
       tags:
         - Accounts
@@ -73,6 +73,8 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
+      security:
+        - public_key: []
     post:
       tags:
         - Accounts
@@ -119,7 +121,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /accounts/{id}:
+  /accounts/{id}.json:
     get:
       operationId: getAccountById
       tags:
@@ -266,7 +268,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /accounts/search:
+  /accounts/search.json:
     get:
       tags:
         - Accounts
@@ -350,7 +352,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /bookings:
+  /bookings.json:
     get:
       tags:
         - Bookings
@@ -443,7 +445,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /bookings/{id}:
+  /bookings/{id}.json:
     get:
       operationId: getBookingByID
       tags:
@@ -590,7 +592,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /bookings/search:
+  /bookings/search.json:
     get:
       tags:
         - Bookings
@@ -684,7 +686,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /contacts:
+  /contacts.json:
     post:
       tags:
         - Contacts
@@ -731,7 +733,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /contacts/{id}:
+  /contacts/{id}.json:
     get:
       operationId: getContactById
       tags:
@@ -878,7 +880,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /contacts/search:
+  /contacts/search.json:
     get:
       tags:
         - Contacts
@@ -964,7 +966,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /events:
+  /events.json:
     get:
       tags:
         - Events
@@ -1057,7 +1059,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /events/{id}:
+  /events/{id}.json:
     get:
       operationId: getEventById
       tags:
@@ -1204,7 +1206,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /events/search:
+  /events/search.json:
     get:
       tags:
         - Events
@@ -1285,7 +1287,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /leads:
+  /leads.json:
     get:
       tags:
         - Leads
@@ -1378,7 +1380,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /leads/{id}:
+  /leads/{id}.json:
     get:
       operationId: getLeadById
       tags:
@@ -1525,7 +1527,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /leads/search:
+  /leads/search.json:
     get:
       tags:
         - Leads
@@ -1606,7 +1608,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /locations:
+  /locations.json:
     get:
       tags:
         - Locations
@@ -1647,7 +1649,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /sites:
+  /sites.json:
     get:
       tags:
         - Sites
@@ -1688,7 +1690,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /users:
+  /users.json:
     get:
       tags:
         - Users
@@ -1735,7 +1737,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /users/{id}:
+  /users/{id}.json:
     get:
       operationId: getUserById
       tags:
@@ -1783,7 +1785,7 @@ paths:
             $ref: "#/definitions/NotOkayResponse"
         default:
           description: "Unexpected response"
-  /users/search:
+  /users/search.json:
     get:
       tags:
         - Users
